@@ -1,0 +1,33 @@
+<head>
+    <link rel="stylesheet" href="test.css">
+</head>
+
+<body>
+    <div class='example'>
+        <h2>Bitte geben sie ihre Adresse ein:</h2>
+        <p>Straße: <input data-bind="value: street" /></p>
+        <p>Hausnummer: <input data-bind="value: adress" /></p>
+        <p>PLZ: <input data-bind="value: pic" /></p>
+        <p>Stadt: <input data-bind="value: city" /></p>
+        <p>Land: <input data-bind="value: nation" /></p>
+    
+        <h2><span data-bind="text: fullAdress"></span></h2>
+    </div>
+
+    <script type='text/javascript' src='knockout-3.5.1.js'></script>
+    <script>
+        var ViewModel = function(streetInput, adressInput, picInput, cityInput, nationInput) {
+            this.street = ko.observable(streetInput);
+            this.adress = ko.observable(adressInput);
+            this.pic = ko.observable(picInput);
+            this.city = ko.observable(cityInput);
+            this.nation = ko.observable(nationInput);
+
+            this.fullAdress = ko.computed(function() {
+                return this.street() + " " + this.adress() + " in " + this.pic() + " " + this.city() + ", " + this.nation();
+            }, this);
+        };
+        
+        ko.applyBindings(new ViewModel("Musterstraße", "1", "12345", "Musterstadt", "Deutschland")); // Default
+    </script>
+</body>
